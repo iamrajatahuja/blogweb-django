@@ -1,0 +1,10 @@
+.vnv/
+.idea/
+
+blog-website_django/__pycache__/
+blogs/__pycache__/
+
+db.sqlite3
+
+
+
