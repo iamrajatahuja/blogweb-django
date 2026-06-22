@@ -1,0 +1,14 @@
+Steps to create Django project
+==============================
+
+Run command:
+pip install django
+
+Go to project directory and run:
+django-admin startproject project_name
+
+After creating project go inside project directory and run:
+python manage.py startapp app_name
+
+To run the server:
+python manage.py runserver
