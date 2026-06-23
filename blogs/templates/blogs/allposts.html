@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'blogs/app.css' %}">
+{% endblock %}
 
 {% block page_title %}
     All Posts
