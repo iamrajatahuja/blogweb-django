@@ -3,6 +3,7 @@
 
 blog_website_django/__pycache__/
 blogs/__pycache__/
+blogs/migrations/__pycache__/
 
 *.sqlite3
 
