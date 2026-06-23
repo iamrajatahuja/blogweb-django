@@ -1,16 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ blog_name|title }}</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block page_title %}
+    {{ blog_name|title }}
+{% endblock %}
+
+{% block body_content %}
+    {% include "blogs/includes/header.html" %}
     <h1>{{ blog_name|title }} blog post</h1> <!-- title filter is built in django templates -->
     {% if blog_text %}
         <h2>{{ blog_text }}</h2>
     {% else %}
         <h2>Blog is in progress...</h2>
     {% endif %}
-</body>
-</html>
+{% endblock %}

@@ -1,16 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>All Posts</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block page_title %}
+    All Posts
+{% endblock %}
+
+{% block body_content %}
+    {% include "blogs/includes/header.html" %}
     <ul>
         {% for bl in blogs %}
             <!--<li><a href="/allposts/{{bl}}">{{ bl|capfirst }}</a></li>-->
             <li><a href="{% url 'blog-post' blog=bl %}">{{ bl|capfirst }}</a></li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
