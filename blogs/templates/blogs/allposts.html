@@ -10,11 +10,15 @@
 {% endblock %}
 
 {% block body_content %}
-    {% include "blogs/includes/header.html" %}
-    <ul>
-        {% for bl in blogs %}
-            <!--<li><a href="/allposts/{{bl}}">{{ bl|capfirst }}</a></li>-->
-            <li><a href="{% url 'blog-post' blog=bl %}">{{ bl|capfirst }}</a></li>
-        {% endfor %}
-    </ul>
+    <!--{% include "blogs/includes/header.html" %}--><!--Include this when header.html has some code-->
+    <section>
+        <h2>All the posts</h2>
+        <ul>
+            {% for bl in blogs %}
+                <!--<li><a href="/allposts/{{bl}}">{{ bl|capfirst }}</a></li>-->
+                {% include 'blogs/includes/posts.html' %}
+            {% endfor %}
+        </ul>
+    </section>
+
 {% endblock %}

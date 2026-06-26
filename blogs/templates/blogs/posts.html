@@ -1,15 +1,22 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block page_title %}
-    {{ blog_name|title }}
+    {{ post.title }}
 {% endblock %}
 
 {% block body_content %}
-    {% include "blogs/includes/header.html" %}
-    <h1>{{ blog_name|title }} blog post</h1> <!-- title filter is built in django templates -->
-    {% if blog_text %}
-        <h2>{{ blog_text }}</h2>
-    {% else %}
-        <h2>Blog is in progress...</h2>
-    {% endif %}
+    <!--{% include "blogs/includes/header.html" %}--><!--Include this when header.html has some code-->
+    <section>
+        <h2>{{ post.title }}</h2>
+        <article>
+            <img src="{% static 'blogs/images/'|add:post.image %}" alt="{{ post.title }}" width="100" height="100"/>
+            <div>Posted on <time>{{ post.date|date:"d M Y" }}</time></div>
+        </article>
+    </section>
+
+    <main>
+        <p>{{ post.content }}</p>
+    </main>
+
 {% endblock %}

@@ -11,6 +11,12 @@
 
 </head>
 <body>
+    <header>
+        <h1><a href="{% url 'home' %}">Home Page</a></h1>
+        <nav>
+            <a href="{% url 'all-posts' %}">All Posts</a>
+        </nav>
+    </header>
     {% block body_content %}{% endblock %}
 </body>
 </html>

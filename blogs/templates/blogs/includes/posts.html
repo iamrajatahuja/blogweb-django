@@ -1,0 +1,13 @@
+{% load static %}
+
+<li>
+    <article>
+        <a href="{% url 'blog-post' blog=bl.slug %}">{{ bl.title }}</a>
+        <img src="{% static 'blogs/images/'|add:bl.image %}" alt="{{ bl.title }}" width="100" height="100"/>
+        <div>
+            <p>{{ bl.preview }}</p>
+        </div>
+    </article>
+</li>
+
+<!--Inside includes directory, variable names of including files are directly accessed-->
