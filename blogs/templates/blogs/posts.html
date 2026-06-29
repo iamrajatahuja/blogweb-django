@@ -9,8 +9,14 @@
     <!--{% include "blogs/includes/header.html" %}--><!--Include this when header.html has some code-->
     <section>
         <h2>{{ post.title }}</h2>
+        <div>
+            {% for tag in tags %}
+                <span>{{ tag }}</span>
+            {% endfor %}
+        </div>
         <article>
             <img src="{% static 'blogs/images/'|add:post.image %}" alt="{{ post.title }}" width="100" height="100"/>
+            <address>By <a href="mailto: {{ post.author.email_addr }}">{{ post.author }}</a></address>
             <div>Posted on <time>{{ post.date|date:"d M Y" }}</time></div>
         </article>
     </section>
