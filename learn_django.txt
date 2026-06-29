@@ -12,3 +12,12 @@ python manage.py startapp app_name
 
 To run the server:
 python manage.py runserver
+
+To create migrations:
+python manage.py makemigrations
+
+To run migration operations:
+python manage.py migrate
+
+To create user at admin portal:
+python manage.py createsuperuser
