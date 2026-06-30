@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, Http404
+from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseRedirect
 from datetime import date
-# from django.urls import reverse
+from django.urls import reverse
 # from django.template.loader import render_to_string
 from .models import Post
+from .forms import CommentForm
 
 # Create your views here.
 
@@ -108,17 +109,32 @@ def blogposts(request):
 #     return None
 
 def blog_post(request,blog):
-    try:
-        # res = blog_names[blog]
-        # res = get_blog_by_slug(blog)
-        # return render(request, "blogs/posts.html", {"blog_text":res, "blog_name":process_blog_name(blog)})
-        res = Post.objects.get(slug = blog)
-        tag_caption = res.tags.all()
-        return render(request, "blogs/posts.html", {"post": res, "tags":tag_caption})
-    except Exception:
-        # res_data = render_to_string("404.html")
-        # return HttpResponseNotFound(res_data)
-        raise Http404() #works when DEBUG=False in settings and loads 404.html
+    post_data = Post.objects.get(slug=blog)
+    tag_caption = post_data.tags.all()
+    all_comments = post_data.comments.all().order_by('-id')
+
+    if request.method == "POST":
+        commented_data = request.POST
+        form = CommentForm(commented_data)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post_data
+            comment.save()
+            return HttpResponseRedirect(reverse("blog-post", args=[blog]))
+        return render(request, "blogs/posts.html", {"post": post_data, "tags": tag_caption, "comment_form": form, "comments": all_comments})
+    else:
+        try:
+            # res = blog_names[blog]
+            # res = get_blog_by_slug(blog)
+            # return render(request, "blogs/posts.html", {"blog_text":res, "blog_name":process_blog_name(blog)})
+
+            form_data = CommentForm()
+
+            return render(request, "blogs/posts.html", {"post": post_data, "tags":tag_caption, "comment_form":form_data, "comments":all_comments})
+        except Exception:
+            # res_data = render_to_string("404.html")
+            # return HttpResponseNotFound(res_data)
+            raise Http404() #works when DEBUG=False in settings and loads 404.html
 
 # def blog_post_by_number(request,blog):
 #     return HttpResponse(blog)

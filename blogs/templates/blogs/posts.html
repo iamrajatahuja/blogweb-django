@@ -25,4 +25,24 @@
         <p>{{ post.content }}</p>
     </main>
 
+    <section>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <h3>{{ comment.comment_text }}</h3>
+                    <p>Commented By {{ comment.user_name }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Comments</h2>
+        <form action="{% url 'blog-post' post.slug %}" method="POST">
+            {% csrf_token %}
+            {{ comment_form }}
+            <button>Save</button>
+        </form>
+    </section>
+
 {% endblock %}
